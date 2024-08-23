@@ -9,12 +9,12 @@ async function bootstrap(): Promise<void> {
 
 	const server = new Elysia({ prefix: env.stripPrefix.path });
 
+	new Plugins(server).execute();
+	new Routes(server).execute();
+
 	server.onError(({ error, set, code }) => {
 		return errorHandler({ genericError: error, set, code });
 	});
-
-	new Plugins(server).execute();
-	new Routes(server).execute();
 
 	server.listen(env.app.port || 3000);
 	process.stdout.write(

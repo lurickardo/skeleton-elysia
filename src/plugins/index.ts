@@ -19,6 +19,5 @@ export default class Plugins<T> {
 
 	public execute() {
 		this.plugins.forEach((plugin) => plugin.execute(this.server));
-		return this.server;
 	}
 }

@@ -1,3 +1,3 @@
 export interface PluginsInterface<T> {
-	execute(server: T): T;
+	execute(server: T): void;
 }
