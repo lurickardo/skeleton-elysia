@@ -1,5 +1,5 @@
-import type Elysia from "elysia";
 import { cors } from "@elysiajs/cors";
+import type { Elysia } from "elysia";
 import type { PluginsInterface } from "./plugins.interface";
 
 export class CorsPlugin implements PluginsInterface<Elysia> {

@@ -1,5 +1,5 @@
-import { userRouteV1 } from "./v1/modules/user/user.route";
 import type Elysia from "elysia";
+import { userRouteV1 } from "./v1/modules/user/user.route";
 
 export interface RouteInterface {
 	execute(server: Elysia): Elysia;

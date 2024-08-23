@@ -1,9 +1,9 @@
-import type Elysia from "elysia";
-import type { PluginsInterface } from "./plugins.interface";
+import type { Elysia } from "elysia";
 import { env } from "../config";
-import { SwaggerPlugin } from "./swagger.plugin";
 import { CorsPlugin } from "./cors.plugin";
 import { HealthCheckPlugin } from "./healthcheck.plugin";
+import type { PluginsInterface } from "./plugins.interface";
+import { SwaggerPlugin } from "./swagger.plugin";
 
 export default class Plugins<T> {
 	private server: T;
