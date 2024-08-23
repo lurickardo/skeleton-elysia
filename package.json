@@ -21,7 +21,7 @@
     "@elysiajs/cors": "^1.1.0",
     "@elysiajs/swagger": "^1.1.1",
     "@types/node": "^20.10.6",
-    "elysia": "0.8.6",
+    "elysia": "1.0.27",
     "http-status": "^1.7.3",
     "zod": "^3.22.4"
   },

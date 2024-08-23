@@ -9,7 +9,7 @@
   <a href="https://www.npmjs.com" target="_blank"><img src="https://img.shields.io/badge/npm-v10.2.3-green?logo=npm" alt="NPM Version" /></a>
   <a href="https://nodejs.org" target="_blank"><img src="https://img.shields.io/badge/node-v20.10.0-green?logo=nodedotjs" alt="Node Version"></a>
   <a href="https://www.typescriptlang.org" target="_blank"><img src="https://img.shields.io/badge/typescript-v5.3.3-green?logo=typescript" alt="Typescript Version"></a>
-  <a href="https://elysiajs.com/" target="_blank"><img src="https://img.shields.io/badge/elysiajs-v1.1-green?logo=elysiajs" alt="Elysiajs Version"></a>
+  <a href="https://elysiajs.com/" target="_blank"><img src="https://img.shields.io/badge/elysiajs-v0.8.6-green?logo=elysiajs" alt="Elysiajs Version"></a>
   <a href="https://jestjs.io" target="_blank"><img src="https://img.shields.io/badge/jest-v29.7.0-green?logo=jest" alt="Jest Version"></a>
   <a href="https://biomejs.dev" target="_blank"><img src="https://img.shields.io/badge/biome-v1.5.3-green?logo=biome" alt="Biome Version"></a>
   <a href="https://zod.dev/" target="_blank"><img src="https://img.shields.io/badge/zod-v3.22.4-green?logo=zod" alt="Zod Version"></a>

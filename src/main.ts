@@ -1,13 +1,11 @@
 import { Elysia } from "elysia";
 import { Routes } from "./app.module";
-import { clusterize } from "./clusterize";
 import { env } from "./config";
 import { errorHandler } from "./config/error";
 import Plugins from "./plugins";
 
 async function bootstrap(): Promise<void> {
 	process.stdout.write("\n\x1b[32mStarting server...\x1b[0m\n");
-	console.log(env.stripPrefix.path);
 
 	const server = new Elysia({ prefix: env.stripPrefix.path });
 
