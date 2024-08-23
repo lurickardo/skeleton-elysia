@@ -1,9 +1,9 @@
-import Elysia from "elysia";
+import type Elysia from "elysia";
 import { swagger } from "@elysiajs/swagger";
-import { PluginInterface } from "./plugins.interface";
+import type { PluginsInterface } from "./plugins.interface";
 
-export class SwaggerPlugin implements PluginInterface {
-  public execute(server: Elysia): Elysia {
-    return server.use(swagger());
-  }
+export class SwaggerPlugin implements PluginsInterface<Elysia> {
+	public execute(server: Elysia): Elysia {
+		return server.use(swagger());
+	}
 }
