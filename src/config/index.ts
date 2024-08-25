@@ -15,8 +15,8 @@ export const env = Object.freeze({
 	plugins: {
 		swagger: {
 			basePath: Object.is(process.env.USE_ROUTE_PREFIX, "true")
-				? `/api/${application.name.replace(/-/g, "")}/`
-				: "/",
+				? `/api/${application.name.replace(/-/g, "")}`
+				: "",
 		},
 	},
 	stripPrefix: {
