@@ -1,85 +1,35 @@
+import { t } from "elysia";
+import { createUserSchema, updateUserSchema } from "./dto";
+
 export const userSchema = {
-	findById: {
-		params: {
-			type: "object",
-			properties: {
-				id: {
-					type: "string",
-				},
-			},
-			required: ["id"],
-		},
-		headers: {
-			type: "object",
-			properties: {
-				Authorization: { type: "string" },
-			},
-			additionalProperties: true,
-		},
-	},
 	listAll: {
-		params: {
-			type: "object",
-			properties: {},
-			required: [],
-		},
-		headers: {
-			type: "object",
-			properties: {},
-			additionalProperties: true,
-		},
+		headers: t.Object({
+			authorization: t.String(),
+		}),
+	},
+	findById: {
+		params: t.Object({
+			id: t.String(),
+		}),
+		headers: t.Object({
+			authorization: t.String(),
+		}),
 	},
 	create: {
-		body: {
-			type: "object",
-			properties: {
-				name: {
-					type: "string",
-				},
-				email: {
-					type: "string",
-				},
-			},
-			required: ["name", "email"],
-		},
+		body: createUserSchema,
+		headers: t.Object({
+			authorization: t.String(),
+		}),
 	},
 	update: {
-		params: {
-			type: "object",
-			properties: {
-				id: {
-					type: "string",
-				},
-			},
-			required: ["id"],
-		},
-		body: {
-			type: "object",
-			properties: {
-				name: {
-					type: "string",
-				},
-				email: {
-					type: "string",
-				},
-			},
-			required: ["name", "email"],
-		},
+		body: updateUserSchema,
+		headers: t.Object({
+			authorization: t.String(),
+		}),
 	},
 	remove: {
-		params: {
-			type: "object",
-			properties: {
-				id: {
-					type: "string",
-				},
-			},
-			required: ["id"],
-		},
-		headers: {
-			type: "object",
-			properties: {},
-			additionalProperties: true,
-		},
+		params: t.Object({
+			id: t.String(),
+		}),
 	},
 };

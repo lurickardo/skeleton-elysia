@@ -22,8 +22,4 @@ export const env = Object.freeze({
 	stripPrefix: {
 		path: `/api/${application.name.replace(/-/g, "")}`,
 	},
-	database: {
-		name: process.env.DB_NAME,
-		url: process.env.DB_URL,
-	},
 } as Env);

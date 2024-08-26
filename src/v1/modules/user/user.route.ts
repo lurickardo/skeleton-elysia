@@ -1,63 +1,68 @@
-import { userController } from "./user.controller";
-import { userMiddleware } from "./user.middleware";
+import { DocumentDecoration, Elysia, t } from "elysia";
+import { RouteInterface } from "src/app.module";
 import { userSchema } from "./user.schema";
+import { UserService } from "./user.service";
+import { errorHandler } from "src/config/error";
 
-const findById = {
-	method: "GET",
-	url: "/v1/user/:id",
-	schema: {
-		tags: ["v1"],
-		summary: "Find data of user by id",
-		...userSchema.findById,
-	},
-	preHandler: userMiddleware.findById,
-	handler: userController.findById,
-	apisSorter: "alpha",
-	operationsSorter: "method",
-};
+export class UserRouteV1 implements RouteInterface<Elysia> {
+	private prefix: string;
+	private detail: DocumentDecoration;
 
-const listAll = {
-	method: "GET",
-	url: "/v1/user",
-	schema: {
-		tags: ["v1"],
-		summary: "Find data of all users",
-		...userSchema.listAll,
-	},
-	handler: userController.listAll,
-};
+	constructor() {
+		this.prefix = "/v1/user";
+		this.detail = {
+			tags: ["v1"],
+		};
+	}
 
-const create = {
-	method: "POST",
-	url: "/v1/user",
-	schema: {
-		tags: ["v1"],
-		summary: "Create user",
-		...userSchema.create,
-	},
-	handler: userController.create,
-};
+	private routes(app: Elysia) {
+		return app
+			.get(
+				"",
+				async () => {
+					return new UserService().listAll();
+				},
+				userSchema.listAll,
+			)
+			.get(
+				":id",
+				async ({ params: { id } }) => {
+					return new UserService().findById(id);
+				},
+				userSchema.findById,
+			)
+			.post(
+				"",
+				async ({ body }) => {
+					return new UserService().create(body as any);
+				},
+				userSchema.create,
+			)
+			.put(
+				"",
+				async ({ params: { id }, body }) => {
+					return new UserService().update(id, body as any);
+				},
+				userSchema.update,
+			)
+			.delete(
+				"",
+				async ({ params: { id } }) => {
+					return new UserService().remove(id);
+				},
+				userSchema.remove,
+			);
+	}
 
-const update = {
-	method: "PUT",
-	url: "/v1/user/:id",
-	schema: {
-		tags: ["v1"],
-		summary: "Update user",
-		...userSchema.update,
-	},
-	handler: userController.update,
-};
-
-const remove = {
-	method: "DELETE",
-	url: "/v1/user/:id",
-	schema: {
-		tags: ["v1"],
-		summary: "Remove user",
-		...userSchema.remove,
-	},
-	handler: userController.remove,
-};
-
-export const userRouteV1 = [findById, listAll, create, update, remove];
+	public execute(server: Elysia): void {
+		server.group(
+			this.prefix,
+			{
+				detail: {
+					...this.detail,
+				},
+			},
+			(app) => this.routes(app as any),
+		);
+	}
+}

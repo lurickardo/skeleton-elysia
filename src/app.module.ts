@@ -1,23 +1,20 @@
-import type Elysia from "elysia";
-import { userRouteV1 } from "./v1/modules/user/user.route";
+import Elysia from "elysia";
+import { UserRouteV1 } from "./v1/modules/user/user.route";
 
-export interface RouteInterface {
-	execute(server: Elysia): Elysia;
+export interface RouteInterface<T> {
+	execute(server: T): void;
 }
 
-export class Routes {
-	private server: any;
-	private routes: RouteInterface[];
+export class Routes<T> {
+	private server: T;
+	private routes: RouteInterface<Elysia | T>[];
 
-	constructor(server: any) {
+	constructor(server: T) {
 		this.server = server;
-		this.routes = [];
+		this.routes = [new UserRouteV1()];
 	}
 
 	public execute() {
-		this.routes.forEach((route) => {
-			// implementar rotas
-		});
-		return this.server;
+		this.routes.forEach((route) => route.execute(this.server));
 	}
 }
