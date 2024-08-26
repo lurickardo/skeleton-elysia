@@ -8,8 +8,11 @@
   "license": "MIT",
   "bunVersion": "1.0.27",
   "scripts": {
-    "build": "tsc",
-    "prd": "bun --env-file=.env src/main.ts",
+    "pipe": "bun run prebuild && bun run build && bun run postbuild",
+    "prebuild": "rm -rf dist/ node_modules/",
+    "build": "bun install && bun tsc",
+    "postbuild": "cp package.json dist/ && cp bun.lockb dist/ && cd dist && bun install --production",
+    "prd": "bun --env-file=.env dist/src/main.js",
     "dev": "bun --watch --env-file=.env src/main.ts",
     "debug": "bun --watch --debug --env-file=.env src/main.ts",
     "test": "jest --runInBand --coverage --config ./test/jest.config.json",
@@ -39,8 +42,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint:check && npm run test:cov && npm run build",
-      "pre-push": "npm run lint:check && npm run test:cov && npm run build"
+      "pre-commit": "bun run lint:check && bun run test:cov && bun run build",
+      "pre-push": "bun run lint:check && bun run test:cov && bun run build"
     }
   }
 }
