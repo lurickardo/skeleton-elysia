@@ -42,8 +42,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "bun run lint:check && bun run test:cov && bun run build",
-      "pre-push": "bun run lint:check && bun run test:cov && bun run build"
+      "pre-commit": "bun run lint:check && bun run test:cov && bun run pipe",
+      "pre-push": "bun run lint:check && bun run test:cov && bun run pipe"
     }
   }
 }
