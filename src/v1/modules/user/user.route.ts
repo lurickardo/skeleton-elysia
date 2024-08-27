@@ -45,7 +45,7 @@ export class UserRouteV1 implements RouteInterface<Elysia> {
 				userSchema.update,
 			)
 			.delete(
-				"",
+				":id",
 				async ({ params: { id } }) => {
 					return new UserService().remove(id);
 				},
