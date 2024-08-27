@@ -1,4 +1,4 @@
-import { UserService } from "./user.service";
+import { UserService } from "../../../../../src/v1/modules/user/user.service";
 
 describe("Unit tests for user service", () => {
 	describe("findById", () => {

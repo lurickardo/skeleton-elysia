@@ -1,10 +1,16 @@
 import { t } from "elysia";
 import { createUserSchema, updateUserSchema } from "./dto";
 
+const defaultHeader = {
+	authorization: t.String({
+		error: "Authorization header is required",
+	}),
+};
+
 export const userSchema = {
 	listAll: {
 		headers: t.Object({
-			authorization: t.String(),
+			...defaultHeader,
 		}),
 	},
 	findById: {
@@ -12,19 +18,19 @@ export const userSchema = {
 			id: t.String(),
 		}),
 		headers: t.Object({
-			authorization: t.String(),
+			...defaultHeader,
 		}),
 	},
 	create: {
 		body: createUserSchema,
 		headers: t.Object({
-			authorization: t.String(),
+			...defaultHeader,
 		}),
 	},
 	update: {
 		body: updateUserSchema,
 		headers: t.Object({
-			authorization: t.String(),
+			...defaultHeader,
 		}),
 	},
 	remove: {
