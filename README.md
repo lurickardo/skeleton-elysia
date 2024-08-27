@@ -6,8 +6,8 @@
 <p align="center">Generic software architecture framework in <a href="https://nodejs.org" target="_blank">Node.js</a> using Elysiajs.</p>
 <p align="center">
   <a><img src="https://img.shields.io/badge/license-MIT-green" alt="Package License" /></a>
-  <a href="https://www.npmjs.com" target="_blank"><img src="https://img.shields.io/badge/npm-v10.2.3-green?logo=npm" alt="NPM Version" /></a>
-  <a href="https://nodejs.org" target="_blank"><img src="https://img.shields.io/badge/node-v20.10.0-green?logo=nodedotjs" alt="Node Version"></a>
+  <a href="https://bun.sh/" target="_blank"><img src="https://img.shields.io/badge/bun-v1.0.26-green?logo=bun" alt="Bun Version" /></a>
+  <a href="https://nodejs.org" target="_blank"><img src="https://img.shields.io/badge/node-v20.17.0-green?logo=nodedotjs" alt="Node Version"></a>
   <a href="https://www.typescriptlang.org" target="_blank"><img src="https://img.shields.io/badge/typescript-v5.3.3-green?logo=typescript" alt="Typescript Version"></a>
   <a href="https://elysiajs.com/" target="_blank"><img src="https://img.shields.io/badge/elysiajs-v0.8.6-green?logo=elysiajs" alt="Elysiajs Version"></a>
   <a href="https://jestjs.io" target="_blank"><img src="https://img.shields.io/badge/jest-v29.7.0-green?logo=jest" alt="Jest Version"></a>
