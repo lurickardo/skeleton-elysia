@@ -6,7 +6,7 @@
   "email": "luizr726@gmail.com",
   "private": true,
   "license": "MIT",
-  "bunVersion": "1.0.27",
+  "bunVersion": "1.1.26",
   "scripts": {
     "pipe": "bun run prebuild && bun run build && bun run postbuild",
     "prebuild": "rm -rf dist/ node_modules/",
