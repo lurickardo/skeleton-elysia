@@ -1,8 +1,8 @@
 import { swagger } from "@elysiajs/swagger";
-import * as application from "../../package.json";
 import type { Elysia } from "elysia";
-import type { PluginsInterface } from "./plugins.interface";
 import { env } from "src/config";
+import * as application from "../../package.json";
+import type { PluginsInterface } from "./plugins.interface";
 
 export class SwaggerPlugin implements PluginsInterface<Elysia> {
 	public execute(server: Elysia): void {
