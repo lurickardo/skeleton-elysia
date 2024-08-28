@@ -1,5 +1,3 @@
-import Elysia from "elysia";
-
-export interface PluginInterface {
-  execute(server: Elysia): Elysia;
+export interface PluginsInterface<T> {
+	execute(server: T): void;
 }

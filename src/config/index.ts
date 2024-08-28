@@ -15,15 +15,11 @@ export const env = Object.freeze({
 	plugins: {
 		swagger: {
 			basePath: Object.is(process.env.USE_ROUTE_PREFIX, "true")
-				? `/api/${application.name.replace(/-/g, "")}/`
-				: "/",
+				? `/api/${application.name.replace(/-/g, "")}`
+				: "",
 		},
 	},
 	stripPrefix: {
 		path: `/api/${application.name.replace(/-/g, "")}`,
-	},
-	database: {
-		name: process.env.DB_NAME,
-		url: process.env.DB_URL,
 	},
 } as Env);

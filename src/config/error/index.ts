@@ -1,60 +1,74 @@
-import { Context } from "elysia";
+import type { Context } from "elysia";
 import * as HttpStatus from "http-status";
 
 type errorHandlerType = {
-  genericError: any;
-  set: Context["set"];
-  code: number;
+	genericError: any;
+	set: Context["set"];
+	code: string;
 };
 
-const isZodError = (error: any): boolean => {
-  return !!error.issues;
+const isTypeboxError = (code: string): boolean => {
+	return code === "VALIDATION";
+};
+
+const isElysiaError = (error: any): boolean => {
+	return !!error.validator?.schema;
 };
 
 const isFlowError = (error: any): boolean => {
-  return error.message && error.statusCode;
+	return error.message && error.statusCode;
 };
 
 export const errorHandler = ({ genericError, set, code }: errorHandlerType) => {
-  const error = { ...genericError };
+	const error = { ...genericError };
 
-  if (isZodError(error)) {
-    const message = error.issues.map((issue) => {
-      return `${issue.path[0]}: ${issue.message}`;
-    });
+	if (isTypeboxError(code)) {
+		set.status = HttpStatus.BAD_REQUEST;
+		return {
+			statusCode: HttpStatus.BAD_REQUEST,
+			message: genericError.message,
+			timestamp: new Date().toISOString(),
+		};
+	}
 
-    set.status = HttpStatus.BAD_REQUEST;
-    return {
-      statusCode: HttpStatus.BAD_REQUEST,
-      message,
-      timestamp: new Date(),
-    };
-  }
+	if (isElysiaError(error)) {
+		set.status = error.code;
+		return {
+			statusCode: error.code,
+			message: error.message,
+			timestamp: new Date().toISOString(),
+		};
+	}
 
-  if (isFlowError(error)) {
-    set.status = error.statusCode;
-    return {
-      statusCode: error.statusCode,
-      message: error.message,
-      timestamp: new Date(),
-    };
-  }
+	if (isFlowError(error)) {
+		set.status = error.statusCode;
+		return {
+			statusCode: error.statusCode,
+			message: error.message,
+			timestamp: new Date(),
+		};
+	}
 
-  process.stdout.write(
-    `\n\n\x1b[41m--- UNEXPECTED ERROR --- \x1b[0m\n ${
-      Object.keys(error).length ? JSON.stringify(error) : genericError
-    }\n\x1b[41m--- END UNEXPECTED ERROR --- \x1b[0m\n\n\n`,
-  );
-  return reply.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
-    statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-    message: HttpStatus[500],
-    timestamp: new Date(),
-  });
+	process.stdout.write(
+		`\n\n\x1b[41m--- UNEXPECTED ERROR CODE ${code} ---\x1b[0m\n`,
+	);
+	process.stdout.write(
+		`Error: \n${
+			Object.keys(error).length ? JSON.stringify(error) : genericError
+		}\n\x1b[41m--- END UNEXPECTED ERROR --- \x1b[0m\n\n\n`,
+	);
+
+	set.status = HttpStatus.INTERNAL_SERVER_ERROR;
+	return {
+		statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+		message: HttpStatus[500],
+		timestamp: new Date().toISOString(),
+	};
 };
 
 export const httpException = (
-  message: string | string[],
-  statusCode: number,
+	message: string | string[],
+	statusCode: number,
 ) => {
-  return { message, statusCode };
+	return { message, statusCode };
 };
