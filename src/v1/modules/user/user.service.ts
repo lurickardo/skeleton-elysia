@@ -1,22 +1,9 @@
 import * as HttpStatus from "http-status";
 import { httpException } from "../../../../src/config/error";
-import { CreateUserDto } from "./dto";
+import { CreateUserDto, UpdateUserDto } from "./dto";
 
-export const userService = {
-	findById: async (id: string) => {
-		try {
-			if (!id) throw httpException("Id user not found.", HttpStatus.NOT_FOUND);
-			return {
-				_id: id,
-				name: "Jhon Doe",
-				email: "jhondoe@gmail.com",
-			};
-		} catch (error) {
-			throw error;
-		}
-	},
-
-	listAll: async () => {
+export class UserService {
+	public async listAll() {
 		return [
 			{
 				_id: String(Math.floor(Math.random() * 1000)),
@@ -29,12 +16,26 @@ export const userService = {
 				email: "foobar@gmail.com",
 			},
 		];
-	},
+	}
 
-	create: async (createUserDto: CreateUserDto) => {
+	public async findById(id: string) {
+		try {
+			if (!id) throw httpException("Id user not found.", HttpStatus.NOT_FOUND);
+			return {
+				_id: id,
+				name: "Jhon Doe",
+				email: "jhondoe@gmail.com",
+			};
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	public async create(createUserDto: CreateUserDto) {
 		try {
 			if (!createUserDto)
 				throw httpException("User data was not sent.", HttpStatus.BAD_REQUEST);
+
 			return {
 				_id: String(Math.floor(Math.random() * 100)),
 				name: createUserDto.name,
@@ -43,29 +44,29 @@ export const userService = {
 		} catch (error) {
 			throw error;
 		}
-	},
+	}
 
-	update: async (id: string, createUserDto: CreateUserDto) => {
+	public async update(id: string, updateUserDto: UpdateUserDto) {
 		try {
 			if (!id) throw httpException("Id user not found.", HttpStatus.NOT_FOUND);
-			if (!createUserDto)
+			if (!updateUserDto)
 				throw httpException("User data was not sent.", HttpStatus.BAD_REQUEST);
 			return {
 				_id: id,
-				name: createUserDto.name,
-				email: createUserDto.email,
+				name: updateUserDto.name,
+				email: updateUserDto.email,
 			};
 		} catch (error) {
 			throw error;
 		}
-	},
+	}
 
-	remove: async (id: string) => {
+	public async remove(id: string) {
 		try {
 			if (!id) throw httpException("Id user not found.", HttpStatus.NOT_FOUND);
 			return { message: "User successfully removed" };
 		} catch (error) {
 			throw error;
 		}
-	},
-};
+	}
+}
