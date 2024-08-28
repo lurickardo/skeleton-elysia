@@ -23,5 +23,6 @@
 		}
 	},
 	"testEnvironment": "node",
-	"testMatch": ["**/tests/**/*.(js|ts)?(x)", "**/?(*.)+(spec|test).(js|ts)?(x)"]
+	"testMatch": ["**/tests/**/*.(js|ts)?(x)", "**/?(*.)+(spec|test).(js|ts)?(x)"],
+	"modulePathIgnorePatterns": ["<rootDir>/dist", "<rootDir>/node_modules", "<rootDir>/coverage"]
 }
